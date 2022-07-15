@@ -264,7 +264,7 @@ export declare class LiveEventListQuery {
 }
 
 
-export declare class SendbirdLive {
+declare class SendbirdLiveMain {
   init(appId: string): void;
 
   setLoggerLevel(level: LEVELS): LEVELS;
@@ -295,3 +295,5 @@ export declare enum ErrorCode {
   QUERY_IN_PROGRESS = 2800900,
   OPEN_CHANNEL_NOT_FETCHED = 2800901,
 }
+
+declare export const SendbirdLive: SendbirdLiveMain;
