@@ -1,0 +1,26 @@
+{
+  "name": "@sendbird/live",
+  "version": "v1.0.0-beta",
+  "description": "Sendbird Live API turns a client app into a live streaming platform where users can broadcast themselves in real-time to their followers.",
+  "main": "sendbirdLive.min.js",
+  "types": "sendbirdLive.min.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sendbird/sendbird-live-sdk-javascript"
+  },
+  "keywords": [
+    "sendbird",
+    "sendbird.com",
+    "live",
+    "js"
+  ],
+  "author": "SendBird <support@sendbird.com>",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/sendbird/sendbird-live-sdk-javascript/issues"
+  },
+  "homepage": "https://sendbird.com"
+}
