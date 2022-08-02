@@ -1,4 +1,4 @@
-# [Sendbird](https://sendbird.com) Calls SDK for JavaScript
+# [Sendbird](https://sendbird.com) Live SDK for JavaScript
 
 [![minified size](https://img.shields.io/bundlephobia/min/@sendbird/live)](https://img.shields.io/bundlephobia/min/@sendbird/live)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/@sendbird/live)](https://img.shields.io/bundlephobia/minzip/@sendbird/live)
