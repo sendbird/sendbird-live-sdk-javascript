@@ -41,27 +41,43 @@ export declare class Participant {
 
 }
 
-export declare interface LiveEventConfiguration {
-  userIdsForHost: string[];
+interface InitParams {
+  appId: string,
+  chatInstance?: SendbirdChat & { openChannel: OpenChannelModule };
+}
+
+export declare interface LiveEventCreateParams {
+  userIdsForHost?: string[];
   // hostType: HostType;
 
   title?: string;
-  coverImage?: string;
+  coverUrl?: string;
+  coverFile?: File;
+  customType?: string;
+}
+
+export declare interface LiveEventUpdateParams {
+  userIdsForHost?: string[];
+  // hostType: HostType;
+
+  title?: string;
+  coverUrl?: string;
+  coverFile?: File;
   customType?: string;
 }
 
 export declare interface LiveEventListQueryParams {
   // hostType: HostType;
-  liveEventState: LiveEventState;
+  liveEventState?: LiveEventState;
 
-  createdAtRange: [number | undefined, number | undefined];
-  participantCountRange: [number | undefined, number | undefined];
-  durationRange: [number | undefined, number | undefined];
+  createdAtRange?: [number | undefined, number | undefined];
+  participantCountRange?: [number | undefined, number | undefined];
+  durationRange?: [number | undefined, number | undefined];
 
-  liveEventIds: string[];
-  createdByUserIds: string[];
+  liveEventIds?: string[];
+  createdByUserIds?: string[];
 
-  limit: number;
+  limit?: number;
 }
 
 export declare enum LiveEventRole {
@@ -89,6 +105,10 @@ export declare enum ParticipantState {
   EXITED = 'exited',
 }
 
+export declare interface CustomItems {
+  [key: string]: string;
+}
+
 export declare type LiveEventEventMap = {
   hostMutedAudio: { args: [LiveEvent, Host] };
   hostUnmutedAudio: { args: [LiveEvent, Host] };
@@ -97,12 +117,15 @@ export declare type LiveEventEventMap = {
   liveEventReady: { args: [LiveEvent] };
   liveEventStarted: { args: [LiveEvent] };
   liveEventEnded: { args: [LiveEvent] };
+  liveEventUpdated: { args: [LiveEvent] };
   hostEntered: { args: [LiveEvent, Host] };
   hostExited: { args: [LiveEvent, Host] };
   hostConnected: { args: [LiveEvent, Host] };
   hostDisconnected: { args: [LiveEvent, Host] };
   participantEntered: { args: [LiveEvent, Participant] };
   participantExited: { args: [LiveEvent, Participant] };
+  customItemsUpdated: { args: [CustomItems, number] };
+  customItemsDeleted: { args: [CustomItems, number] };
   disconnected: { args: [LiveEvent, Error] };
 }
 
@@ -214,7 +237,21 @@ export declare class LiveEvent extends EventTarget<LiveEventEventMap> {
    */
   cumulativeParticipantCount: number;
 
+  /**
+   * The name of a live event.
+   */
+  title: string;
+
+  /**
+   * The thumbnail image used for a live event.
+   */
+  coverUrl: string;
+
   get myRole(): LiveEventRole;
+
+  get isHost(): boolean;
+
+  get customItems(): CustomItems
 
   fetchOpenChannel(): Promise<any>;
 
@@ -249,6 +286,14 @@ export declare class LiveEvent extends EventTarget<LiveEventEventMap> {
   exit(): Promise<void>;
 
   setVideoViewForLiveEvent(mediaView: HTMLMediaElement, hostId: string): void;
+
+  updateLiveEventInfo(params: LiveEventUpdateParams): Promise<void>;
+
+  fetchCustomItems(): Promise<CustomItems>;
+
+  updateCustomItems(customItems: CustomItems): Promise<{ customItems: CustomItems; updatedAt: number; }>;
+
+  deleteCustomItems(customItemKeys: string[]): Promise<{ customItems: CustomItems; deletedAt: number; }>
 }
 
 export declare class LiveEventListQuery {
@@ -265,7 +310,7 @@ export declare class LiveEventListQuery {
 
 
 declare class SendbirdLiveMain {
-  init(appId: string): void;
+  init(params: InitParams): void;
 
   setLoggerLevel(level: LEVELS): LEVELS;
 
@@ -273,7 +318,7 @@ declare class SendbirdLiveMain {
 
   deauthenticate(): Promise<void>;
 
-  createLiveEvent(config: LiveEventConfiguration): Promise<LiveEvent>;
+  createLiveEvent(config: LiveEventCreateParams): Promise<LiveEvent>;
 
   getLiveEvent(liveEventId: string): Promise<LiveEvent>;
 
