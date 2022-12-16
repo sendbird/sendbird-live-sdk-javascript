@@ -1,3 +1,4 @@
+/** v1.0.0-beta.4 */
 export declare interface MediaOption {
   turnAudioOn: boolean;
   turnVideoOn: boolean;
@@ -54,6 +55,7 @@ export declare interface LiveEventCreateParams {
   coverUrl?: string;
   coverFile?: File;
   customType?: string;
+  customItems?: CustomItems;
 }
 
 export declare interface LiveEventUpdateParams {
@@ -251,7 +253,9 @@ export declare class LiveEvent extends EventTarget<LiveEventEventMap> {
 
   get isHost(): boolean;
 
-  get customItems(): CustomItems
+  get isActiveHost(): boolean;
+
+  get customItems(): CustomItems;
 
   fetchOpenChannel(): Promise<any>;
 
@@ -293,7 +297,9 @@ export declare class LiveEvent extends EventTarget<LiveEventEventMap> {
 
   updateCustomItems(customItems: CustomItems): Promise<{ customItems: CustomItems; updatedAt: number; }>;
 
-  deleteCustomItems(customItemKeys: string[]): Promise<{ customItems: CustomItems; deletedAt: number; }>
+  deleteCustomItems(customItemKeys: string[]): Promise<{ customItems: CustomItems; deletedAt: number; }>;
+
+  deleteAllCustomItems(): Promise<{ customItems: CustomItems, deletedAt: number; }>;
 }
 
 export declare class LiveEventListQuery {
@@ -314,7 +320,7 @@ declare class SendbirdLiveMain {
 
   setLoggerLevel(level: LEVELS): LEVELS;
 
-  authenticate(userId: string, accessToken: string): Promise<void>;
+  authenticate(userId: string, accessToken?: string): Promise<void>;
 
   deauthenticate(): Promise<void>;
 
@@ -324,9 +330,21 @@ declare class SendbirdLiveMain {
 
   createLiveEventListQuery(params: LiveEventListQueryParams): LiveEventListQuery;
 
+  useMedia(constraints: MediaConstraints) {
+    return this._ctx.deviceManager.useMedia(constraints);
+  }
+
+  getCurrentAudioInputDevice(): InputDeviceInfo;
+
   getAvailableAudioInputDevices(): InputDeviceInfo[];
 
+  selectAudioInput(mediaDeviceInfo: InputDeviceInfo): void;
+
+  getCurrentVideoInputDevice(): InputDeviceInfo;
+
   getAvailableVideoInputDevices(): InputDeviceInfo[];
+
+  selectVideoInput(mediaDeviceInfo: InputDeviceInfo): void;
 }
 
 export declare enum ErrorCode {

@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.0.0-beta.4 (Dec 16, 2022)
+- Fixed an error in `SendbirdLive.authenticate()`.
+- Fixed the bug that some filters of `LiveEventListQuery` didn't work.
+- Added missing type declaration.
+- Improved stability.
+
 ## v1.0.0-beta.3 (Oct 6, 2022)
 - Added custom items to `LiveEvent`.
 - Added `title` and `coverUrl` to `LiveEvent`.
