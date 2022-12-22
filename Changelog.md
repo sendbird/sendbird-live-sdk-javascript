@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.0-beta.5 (Dec 22, 2022)
+- Added interfaces to support applying filters to camera feed using external video source.
+
 ## v1.0.0-beta.4 (Dec 16, 2022)
 - Fixed an error in `SendbirdLive.authenticate()`.
 - Fixed the bug that some filters of `LiveEventListQuery` didn't work.

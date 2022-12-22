@@ -1,7 +1,8 @@
-/** v1.0.0-beta.4 */
+/** v1.0.0-beta.5 */
 export declare interface MediaOption {
   turnAudioOn: boolean;
   turnVideoOn: boolean;
+  streamProcessor?: (stream: MediaStream) => MediaStream | Promise<MediaStream>;
 }
 
 export declare class Host {
@@ -300,6 +301,10 @@ export declare class LiveEvent extends EventTarget<LiveEventEventMap> {
   deleteCustomItems(customItemKeys: string[]): Promise<{ customItems: CustomItems; deletedAt: number; }>;
 
   deleteAllCustomItems(): Promise<{ customItems: CustomItems, deletedAt: number; }>;
+
+  startUsingExternalVideo(streamProcessor: (stream: MediaStream) => MediaStream | Promise<MediaStream>): Promise<void>;
+
+  stopUsingExternalVideo(): void;
 }
 
 export declare class LiveEventListQuery {
