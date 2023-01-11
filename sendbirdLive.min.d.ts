@@ -1,11 +1,20 @@
-/** v1.0.0-beta.5 */
+/** v1.0.0-beta.6 */
+import { StreamType } from "./liveEvent/host";
+
 export declare interface MediaOption {
   turnAudioOn: boolean;
   turnVideoOn: boolean;
   streamProcessor?: (stream: MediaStream) => MediaStream | Promise<MediaStream>;
 }
 
-export declare class Host {
+export interface RTMPStream {
+  rtmpStreamId: string,
+  rtmpHostUrl: string,
+  streamKey: string,
+  createdAt: number,
+}
+
+export declare interface Host {
 
   hostId: string;
   userId: string;
@@ -23,10 +32,12 @@ export declare class Host {
 
   state: HostState;
   liveEventId: string;
+  streamType: StreamType;
+  rtmpStream: RTMPStream;
 
 }
 
-export declare class Participant {
+export declare interface Participant {
 
   participantId: string;
   userId: string;
@@ -41,6 +52,12 @@ export declare class Participant {
 
   liveEventId: string;
 
+}
+
+export declare interface LiveUser extends Partial<Host>, Partial<Participant> {
+  isHost: boolean;
+  liveUserId: string;
+  state: HostState & ParticipantState;
 }
 
 interface InitParams {
@@ -305,6 +322,10 @@ export declare class LiveEvent extends EventTarget<LiveEventEventMap> {
   startUsingExternalVideo(streamProcessor: (stream: MediaStream) => MediaStream | Promise<MediaStream>): Promise<void>;
 
   stopUsingExternalVideo(): void;
+
+  createRTMPStream(): Promise<RTMPStream>;
+
+  deleteRTMPStream(): Promise<void>;
 }
 
 export declare class LiveEventListQuery {

@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.0-beta.6 (Jan 11, 2022)
+- Add interfaces to support RTMP.
+
 ## 1.0.0-beta.5 (Dec 22, 2022)
 - Added interfaces to support applying filters to camera feed using external video source.
 
