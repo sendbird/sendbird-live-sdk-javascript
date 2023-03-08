@@ -1,10 +1,23 @@
-/** v1.0.0-beta.6 */
+/** v1.0.0-beta.7 */
 import { StreamType } from "./liveEvent/host";
 
 export declare interface MediaOption {
   turnAudioOn: boolean;
   turnVideoOn: boolean;
   streamProcessor?: (stream: MediaStream) => MediaStream | Promise<MediaStream>;
+}
+
+export declare enum CameraOverlayPosition {
+  'TOP_LEFT' = 'top_left',
+  'TOP_RIGHT' = 'top_right',
+  'BOTTON_LEFT' = 'bottom_left',
+  'BOTTOM_RIGHT' = 'bottom_right',
+  'HIDDEN' = 'hidden',
+}
+
+export declare interface ScreenShareOptions {
+  cameraOverlayPosition: CameraOverlayPosition;
+  frameRate: number;
 }
 
 export interface RTMPStream {
@@ -326,6 +339,12 @@ export declare class LiveEvent extends EventTarget<LiveEventEventMap> {
   createRTMPStream(): Promise<RTMPStream>;
 
   deleteRTMPStream(): Promise<void>;
+
+  startScreenShare(options: ScreenShareOptions): Promise<void>;
+
+  stopScreenShare(): void;
+
+  setScreenShareOptions(options: ScreenShareOptions): void;
 }
 
 export declare class LiveEventListQuery {

@@ -1,5 +1,13 @@
 # Change Log
 
+### 1.0.0-beta.7 (Mar 8, 2023)
+* Introducing screen sharing in Live Event. Hosts can now start sharing their screen in their livestreams and share their experience with the audience.
+    * Added `ScreenShareOptions`.
+    * Added `CameraOverlayPosition`.
+    * Added `LiveEvent.startScreenShare(options: ScreenShareOptions): Promise<void>`.
+    * Added `LiveEvent.stopScreenShare(): void`.
+    * Added `LiveEvent.setScreenShareOptions(options: ScreenShareOptions): void`.
+
 ## 1.0.0-beta.6 (Jan 11, 2022)
 - Add interfaces to support RTMP.
 
