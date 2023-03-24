@@ -1,4 +1,4 @@
-/** v1.0.0-beta.7 */
+/** v1.0.0-beta.8 */
 import { StreamType } from "./liveEvent/host";
 
 export declare interface MediaOption {
@@ -10,14 +10,14 @@ export declare interface MediaOption {
 export declare enum CameraOverlayPosition {
   'TOP_LEFT' = 'top_left',
   'TOP_RIGHT' = 'top_right',
-  'BOTTON_LEFT' = 'bottom_left',
+  'BOTTOM_LEFT' = 'bottom_left',
   'BOTTOM_RIGHT' = 'bottom_right',
   'HIDDEN' = 'hidden',
 }
 
 export declare interface ScreenShareOptions {
-  cameraOverlayPosition: CameraOverlayPosition;
-  frameRate: number;
+  cameraOverlayPosition?: CameraOverlayPosition;
+  frameRate?: number;
 }
 
 export interface RTMPStream {
@@ -375,9 +375,7 @@ declare class SendbirdLiveMain {
 
   createLiveEventListQuery(params: LiveEventListQueryParams): LiveEventListQuery;
 
-  useMedia(constraints: MediaConstraints) {
-    return this._ctx.deviceManager.useMedia(constraints);
-  }
+  useMedia(constraints: MediaConstraints);
 
   getCurrentAudioInputDevice(): InputDeviceInfo;
 

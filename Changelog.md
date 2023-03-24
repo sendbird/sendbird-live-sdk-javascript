@@ -1,5 +1,14 @@
 # Change Log
 
+### 1.0.0-beta.8 (Mar 24, 2023 UTC)
+* Improved screen share feature
+    * Prevent the high CPU usage problem if `frameRate` is too high for the current device resource.
+* Fixed wrong type declaration for `useMedia(constraints: MediaConstraints)`
+* Improved device settings APIs
+    * Added `updateMediaDevices(constraints: MediaConstraints)`.
+    * Added `setAudioInputDeviceChanged(listener: (currentAudioInputDevice: InputDeviceInfo, availableAudioInputDevices: InputDeviceInfo[]) => void)`.
+    * Added `setVideoInputDeviceChanged(listener: (currentVideoInputDevice: InputDeviceInfo, availableVideoInputDevices: InputDeviceInfo[]) => void)`.
+
 ### 1.0.0-beta.7 (Mar 8, 2023)
 * Introducing screen sharing in Live Event. Hosts can now start sharing their screen in their livestreams and share their experience with the audience.
     * Added `ScreenShareOptions`.
