@@ -1,4 +1,4 @@
-/** v1.0.0-beta.8 */
+/** v1.0.0-beta.9 */
 import { StreamType } from "./liveEvent/host";
 
 export declare interface MediaOption {
@@ -340,7 +340,7 @@ export declare class LiveEvent extends EventTarget<LiveEventEventMap> {
 
   deleteRTMPStream(): Promise<void>;
 
-  startScreenShare(options: ScreenShareOptions): Promise<void>;
+  startScreenShare(options?: ScreenShareOptions): Promise<void>;
 
   stopScreenShare(): void;
 
@@ -376,6 +376,8 @@ declare class SendbirdLiveMain {
   createLiveEventListQuery(params: LiveEventListQueryParams): LiveEventListQuery;
 
   useMedia(constraints: MediaConstraints);
+
+  updateMediaDevices(constraints: { audio: boolean; video: boolean }): void;
 
   getCurrentAudioInputDevice(): InputDeviceInfo;
 

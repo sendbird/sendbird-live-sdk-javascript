@@ -1,5 +1,9 @@
 # Change Log
 
+### 1.0.0-beta.9 (May 16, 2023 UTC)
+* Fixed the error during updating `customItems`.
+* Added missing type declarations.
+
 ### 1.0.0-beta.8 (Mar 24, 2023 UTC)
 * Improved screen share feature
     * Prevent the high CPU usage problem if `frameRate` is too high for the current device resource.
