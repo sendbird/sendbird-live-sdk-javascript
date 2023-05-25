@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.0.0-beta.10 (May 25, 2023)
+- Added interfaces to get network statistics from ongoing live events.
+    - Added `setConnectionQualityListener(listener: (hostId: string, metric: ConnectionMetrics) => void): void;`
+    - Added `removeConnectionQualityListener(): void;`
+
 ### 1.0.0-beta.9 (May 16, 2023 UTC)
 * Fixed the error during updating `customItems`.
 * Added missing type declarations.

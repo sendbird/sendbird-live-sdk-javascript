@@ -1,4 +1,4 @@
-/** v1.0.0-beta.9 */
+/** v1.0.0-beta.10 */
 import { StreamType } from "./liveEvent/host";
 
 export declare interface MediaOption {
@@ -140,6 +140,12 @@ export declare enum ParticipantState {
 
 export declare interface CustomItems {
   [key: string]: string;
+}
+
+export interface ConnectionMetrics {
+  packetsLostRate?: number;
+  rtt?: number;
+  jitter?: number;
 }
 
 export declare type LiveEventEventMap = {
@@ -345,6 +351,10 @@ export declare class LiveEvent extends EventTarget<LiveEventEventMap> {
   stopScreenShare(): void;
 
   setScreenShareOptions(options: ScreenShareOptions): void;
+
+  setConnectionQualityListener(listener: (hostId: string, metric: ConnectionMetrics) => void): void;
+
+  removeConnectionQualityListener(): void;
 }
 
 export declare class LiveEventListQuery {
