@@ -1,5 +1,8 @@
 # Change Log
 
+### 1.0.0-beta.11 (Aug 3, 2023)
+- Fixed the bug that the user can't enter the `liveEvent` as a host if the user id contains spaces.
+
 ### v1.0.0-beta.10 (May 25, 2023)
 - Added interfaces to get network statistics from ongoing live events.
     - Added `setConnectionQualityListener(listener: (hostId: string, metric: ConnectionMetrics) => void): void;`
