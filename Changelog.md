@@ -1,5 +1,8 @@
 # Change Log
 
+### 1.1.1 (Sep 9, 2023)
+- Added missing export of `HostType`
+
 ### 1.1.0 (Sep 9, 2023)
 
 ## Sendbird Live SDK is now out of beta.

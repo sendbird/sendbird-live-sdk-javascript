@@ -1,4 +1,4 @@
-/** 1.1.0 */
+/** 1.1.1 */
 import { StreamType } from "./liveEvent/host";
 
 /**
@@ -387,7 +387,7 @@ export declare enum HostState {
 /**
  * An Enum that determines the host type for LiveEvent
  */
-export enum HostType {
+export declare enum HostType {
   /**
    * In a single_host Live Event, one host can stream in a live event at the same time, using both audio and video.
    */
