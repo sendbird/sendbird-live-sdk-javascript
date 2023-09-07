@@ -394,11 +394,6 @@ export declare enum HostType {
   SINGLE_HOST = 'single_host',
 
   /**
-   * In a multi_host Live Event, multiple hosts can stream in a live event at the same time, each using audio and video to stream.
-   */
-  MULTIPLE_HOST = 'multiple_host',
-
-  /**
    * In a single_host_audio_only Live Event, one host can stream in a live event at the same time, but can only use audio to stream.
    */
   SINGLE_HOST_AUDIO_ONLY = 'single_host_audio_only',
