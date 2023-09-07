@@ -1,5 +1,23 @@
 # Change Log
 
+### 1.1.0 (Sep 9, 2023)
+
+## Sendbird Live SDK is now out of beta.
+
+## Introducing Audio Only Live Events.
+You can stream live events with audio only, without having to turn the video on.
+- Added `hostType` to `LiveEvent`
+    - `SINGLE_HOST`: live event in which one host can stream video and audio at a time.
+    - `SINGLE_HOST_AUDIO_ONLY`: live event in which one host can stream only audio at a time.
+    - When creating or retrieving a list of live events, you must specify the type of the live event by providing a `hostType` variable.
+- Added `hostType` to `LiveEventCreateParams`
+- Added `hostTypes` to `LiveEventListQueryParams`
+
+## Breaking Changes
+- `participantEntered` and `participantExited` in `LiveEventEventMap` have been removed due to the excessive number of events they triggered when numerous participants joined the live event
+    - Instead, use `participantCountChanged` to track the change of participant counts in a live event. This event will not be called every time a new participant joins the live event. Instead, it will be called periodically depending on the total number of participants joining the live event.
+- `LiveEvent.setVideoViewForLiveEvent()` is renamed to `LiveEvent.setMediaViewForLiveEvent()`. It can accept `HTMLAudioElement` as a parameter, not only `HTMLVideoElement`.
+
 ### 1.0.0-beta.11 (Aug 3, 2023)
 - Fixed the bug that the user can't enter the `liveEvent` as a host if the user id contains spaces.
 
