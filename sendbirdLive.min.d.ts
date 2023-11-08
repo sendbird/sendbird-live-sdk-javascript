@@ -1,4 +1,4 @@
-/** 1.1.1 */
+/** 1.2.0-beta.1 */
 import { StreamType } from "./liveEvent/host";
 
 /**
@@ -19,6 +19,22 @@ export declare interface MediaOption {
    * A property that receives the stream from Sendbird Live SDK, delivers the stream to the external source for modification, and returns the modified stream to the Live SDK.
    */
   streamProcessor?: (stream: MediaStream) => MediaStream | Promise<MediaStream>;
+}
+
+type MediaAccessEventMap = {
+  streamChanged: { args: [MediaStream] };
+}
+
+export declare interface MediaAccess extends EventTarget<LiveEventEventMap> {
+  /**
+   * The MediaStream object of current local device.
+   */
+  stream: MediaStream;
+
+  /**
+   * Dispose this media access. Call this before unload the UI component to release the permission and resource.
+   */
+  dispose: () => void;
 }
 
 /**
@@ -213,9 +229,9 @@ export declare interface LiveEventCreateParams {
   userIdsForHost?: string[];
 
   /**
-   * Then host type of a live event.
+   * The type of a live event.
    */
-  hostType: HostType;
+  type: LiveEventType;
 
   /**
    * The name of a live event.
@@ -272,9 +288,9 @@ export declare interface LiveEventUpdateParams {
  */
 export declare interface LiveEventListQueryParams {
   /**
-   * Filters query results to include live events with the specified host types.
+   * Filters query results to include live events with the specified live event types.
    */
-  hostTypes?: HostType | HostType[];
+  types?: LiveEventType | LiveEventType[];
 
   /**
    * Filters query results to include live events with the specified live event state.
@@ -383,21 +399,14 @@ export declare enum HostState {
   EXITED = 'exited',
 }
 
-
 /**
- * An Enum that determines the host type for LiveEvent
+ * An Enum that determines the type for LiveEvent
  */
-export declare enum HostType {
-  /**
-   * In a single_host Live Event, one host can stream in a live event at the same time, using both audio and video.
-   */
-  SINGLE_HOST = 'single_host',
-
-  /**
-   * In a single_host_audio_only Live Event, one host can stream in a live event at the same time, but can only use audio to stream.
-   */
-  SINGLE_HOST_AUDIO_ONLY = 'single_host_audio_only',
+export enum LiveEventType {
+  LIVE_EVENT_FOR_VIDEO = 'live_event_for_video',
+  LIVE_EVENT_FOR_AUDIO_ONLY = 'live_event_for_audio_only',
 }
+
 
 /**
  * An enum that provides information about the states of a participant.
@@ -512,7 +521,7 @@ export declare type LiveEventEventMap = {
   /**
    * Invoked when a user has been disconnected from the live event due to the given error.
    */
-  disconnected: { args: [LiveEvent, Error] };
+  exited: { args: [LiveEvent, Error] };
 }
 
 declare interface Event {
@@ -556,26 +565,33 @@ export declare class LiveEvent extends EventTarget<LiveEventEventMap> {
    * Unique identifier for the live event.
    */
   liveEventId: string;
+
   /**
    * Host of the live event.
    */
-  host: Host;
+  hosts: Host[];
 
   userIdsForHost: string[];
 
   /**
-   * The type of host
+   * The type of live event.
    */
-  hostType: HostType;
+  type: LiveEventType;
 
   /**
    * The state of a live event. Valid values are created, ready, ongoing, and ended.
    */
   state: LiveEventState;
+
   /**
    * Indicates whether the host is streaming media.
    */
   isHostStreaming: boolean;
+
+  /**
+   *
+   */
+  currentLiveUser: LiveUser;
 
   /**
    * The timestamp of when the live event was created, in miliseconds.
@@ -782,7 +798,7 @@ export declare class LiveEvent extends EventTarget<LiveEventEventMap> {
   /**
    * Deletes the existing RTMP stream. This will exit the existing host with the RTMP stream type.
    */
-  deleteRTMPStream(): Promise<void>;
+  deleteRTMPStream(rtmpStreamId: string): Promise<void>;
 
   /**
    * Starts screen sharing. The screen will show both the shared screen and the host's video view. The position of the host's video view can be configured by the `CameraOverlayPosition` enum.
@@ -871,7 +887,7 @@ declare class SendbirdLiveMain {
    */
   createLiveEventListQuery(params: LiveEventListQueryParams): LiveEventListQuery;
 
-  useMedia(constraints: MediaConstraints);
+  useMedia(constraints: MediaConstraints): MediaAccess;
 
   updateMediaDevices(constraints: { audio: boolean; video: boolean }): void;
 
