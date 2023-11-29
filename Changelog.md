@@ -1,5 +1,11 @@
 # Change Log
 
+### 1.2.0-beta.2 (Nov 29, 2023)
+- Fixed wrong type declarations.
+- Fixed the bug that `LiveEvent.type` is `undefined` sometimes.
+- Fixed the bug that a client can enter in the same live event.
+- Fixed the bug that microphone/camera streams are not correctly disposed after exiting the live event.
+
 ### 1.2.0-beta.1 (Nov 8, 2023)
 - Added support for streaming with multiple hosts
   - Now, multiple hosts can stream in a live event simultaneously.

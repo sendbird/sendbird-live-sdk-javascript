@@ -1,5 +1,5 @@
-/** 1.2.0-beta.1 */
-import { StreamType } from "./liveEvent/host";
+/** 1.2.0-beta.2 */
+import { OpenChannel, OpenChannelModule } from "@sendbird/chat/openChannel";
 
 /**
  * A class that provides media options that can be set when establishing a media stream for a live event.
@@ -25,7 +25,7 @@ type MediaAccessEventMap = {
   streamChanged: { args: [MediaStream] };
 }
 
-export declare interface MediaAccess extends EventTarget<LiveEventEventMap> {
+export declare interface MediaAccess extends EventTarget<MediaAccessEventMap> {
   /**
    * The MediaStream object of current local device.
    */
@@ -70,6 +70,11 @@ export declare enum CameraOverlayPosition {
 export declare interface ScreenShareOptions {
   cameraOverlayPosition?: CameraOverlayPosition;
   frameRate?: number;
+}
+
+export enum StreamType {
+  webrtc = 'webrtc',
+  rtmp = 'rtmp',
 }
 
 export interface RTMPStream {
