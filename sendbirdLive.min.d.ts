@@ -1,4 +1,4 @@
-/** 1.2.0-beta.2 */
+/** 1.2.0 */
 import { OpenChannel, OpenChannelModule } from "@sendbird/chat/openChannel";
 
 /**
