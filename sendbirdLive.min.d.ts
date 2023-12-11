@@ -1,4 +1,4 @@
-/** 1.2.0 */
+/** 1.2.1 */
 import { OpenChannel, OpenChannelModule } from "@sendbird/chat/openChannel";
 
 /**
@@ -527,6 +527,11 @@ export declare type LiveEventEventMap = {
    * Invoked when a user has been disconnected from the live event due to the given error.
    */
   exited: { args: [LiveEvent, Error] };
+
+  /**
+   * Invoked when the resolution of a host has been changed.
+   */
+  resolutionChanged: { args: [LiveEvent, Host, { width: number, height: number }]}
 }
 
 declare interface Event {
