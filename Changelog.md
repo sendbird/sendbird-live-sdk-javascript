@@ -1,5 +1,8 @@
 # Change Log
 
+### 1.2.2 (Mar 14, 2024)
+- Improved WebRTC internal logging
+
 ### 1.2.1 (Dec 11, 2023)
 - Added `resolutionChanged` in `LiveEventEventMap` to monitor changes in video resolution.
 
