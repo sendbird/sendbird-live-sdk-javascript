@@ -1,6 +1,6 @@
 {
   "name": "@sendbird/live",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Sendbird Live API turns a client app into a live streaming platform where users can broadcast themselves in real-time to their followers.",
   "main": "sendbirdLive.min.js",
   "types": "sendbirdLive.min.d.ts",
